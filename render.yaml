@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: hjmproxy
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /__health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: TARGET_URL
+        value: http://107.180.114.144
+      - key: PROXY_HOST
+        value: hjmintl.com
+      - key: PUBLIC_HOST
+        value: hjmintl.com
+      - key: PUBLIC_HOSTS
+        value: hjmintl.com,www.hjmintl.com
+      - key: PROXY_SECURE
+        value: "false"

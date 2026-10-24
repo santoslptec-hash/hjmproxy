@@ -247,7 +247,7 @@ const server = http.createServer((req, res) => {
   }
 
   const host = getRequestHost(req);
-  if (host && !publicHosts.has(host)) {
+  if (host && !publicHosts.has(host) && !host.endsWith(".onrender.com")) {
     res.writeHead(301, { Location: `https://${PUBLIC_HOST}${req.url || "/"}` });
     res.end();
     return;
@@ -266,4 +266,3 @@ server.headersTimeout = PROXY_TIMEOUT + 5000;
 server.requestTimeout = PROXY_TIMEOUT + 5000;
 server.keepAliveTimeout = 65000;
 server.listen(PORT, "0.0.0.0", () => console.log(`listening on ${PORT} -> ${TARGET} host=${PROXY_HOST}`));
-
